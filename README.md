@@ -1,70 +1,254 @@
-# Getting Started with Create React App
+# React Tutorial Notes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What is React.js
 
-## Available Scripts
+React.js:
 
-In the project directory, you can run:
+- A client-side JavaScript library.
+- All about building modern, reactive user interfaces for the web.
+- Declarative, component focused approach.
 
-### `npm start`
+Building Single-Page-Applications(SPAs)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- "Widget" approach on a multi-page-application. (Some) pages are still _rendered on and served by a backend server._
+- (More common) React can also be used to _control the entire frontend_ of a web application. "Single-Page-Application" (SPA) approach. _Server only sends one HTML page_, thereafter, React takes over and controls the UI. **Notes: React may request extra information through ajax technology**.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+React.js alternatives
 
-### `npm test`
+- React: Lean and focues component-based UI library. Certain features(e.g. routing) are added via community packages.
+- Angular: Complete component-based UI framework, packed with features. Uses TypeScript. Can be overkill for smaller projects. (You don't need to rely on the community as much).
+- Vue.js: Kind of the mixture of Angular and React. Complete component-based UI framework, includes most core features. It includes core freatures like routing, more features than react.js but less features than Angular.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+About this course & Course Outline
 
-### `npm run build`
+- Basics & Foundation(Theory/Small Demos & Examples):
+  - Component & Building UIs
+  - Working with Events & Data: "props" and "state"
+  - Styling React Apps & Components
+  - Introduction into "React Hooks"
+- Advanced Concepts(More Realistic (Bigger) Example Projects):
+  - Side Effects, "Refs" & More React Hooks
+  - Reac's Context API & Redux
+  - Forms, Http Requests & "Custom Hooks"
+  - Routing, Deployment, NextJS & More
+- Summaries & Refershers (Challenges & Exercise)
+  - Javascript Refresher
+  - ReactJS Summary
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Next-Gen Javascript
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Let & Const: `Let` is the new `var`, while `const` is something you only assign once.
+- Arrow Functions: No more issues with `this` keyword!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  ```js
+  const myFunc = () => {};
 
-### `npm run eject`
+  // traditional way
+  function myFunc() {}
+  ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Exports & Imports(Modules)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  ```js
+  // person.js
+  const person = {
+    name: "Max",
+  };
+  export default person; // default export
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  // utility.js
+  export const clean = () => {}; // named export
+  export const baseData = 10; // named export
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  // app.js
+  import person from './person.js';
+  import prs from "./person.js"; // you can change name
 
-## Learn More
+  import { baseData } from './utility.js'; // you can not change the name
+  import { clean } from './utility.js'; 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  // alternative import syntax for named export
+  import {baseData as BD} from './person.js';
+  import * as bundled from './utility.js';
+  ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Classes
 
-### Code Splitting
+    ```js
+    class Person {
+        name = 'Max'
+        call = () => {
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+        }
+    }
 
-### Analyzing the Bundle Size
+    const myPerson = new Person();
+    myPerson.call();
+    console.log(myPerson.name);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    // interitance
+    class Person extends Master;
 
-### Making a Progressive Web App
+    // example 
+    class Human {
+        constructor() {
+            this.gender = 'male';
+        }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+        printGender() {
+            console.log(this.gender);
+        }
+    }
 
-### Advanced Configuration
+    class Person extends Human {
+        constructor() {
+            super(); // inherited gender attribute and printGender() method.
+            this.name = 'Max';
+            this.gender = 'female'; // modify the gender attribute
+        }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+        printMyName() {
+            console.log(this.name);
+        }
+    }
 
-### Deployment
+    const person = new Person();
+    person.printMyName(); // max
+    person.printGender(); // female
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Classes, Properties & Method (ES6 vs ES7)
 
-### `npm run build` fails to minify
+    ```js
+    // ES 6
+    constructor() {
+        this.myProperty = 'value';
+    }
+    // ES7
+    myProperty = 'value';
+    
+    // ES6
+    myMethod() {}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    // ES7
+    myMethod = () => {}
+
+    // example: ES6/Babel
+    class Human {
+        gender = 'male';
+
+        printGender = () => {
+            console.log(this.gender);
+        }
+    }
+
+    class Person extends Human {
+            
+        name = 'Max';
+        gender = 'female';
+
+        printMyName = () => {
+            console.log(this.name);
+        }
+    }
+
+    const person = new Person();
+    person.printMyName(); // max
+    person.printGender(); // female
+    ```
+
+- Spread & Rest Operators: `...`
+  
+  - **Spread**: Used to split up array elements OR object properties
+
+  ```js
+  const newArray = [...oldArray, 1, 2];
+  const newObject = {
+      ...oldObject, 
+      newProp: 5 // will update if oldObject has key 'newProp'
+  };
+  ```
+
+  - **Rest**: Used to merge a list of function arguments into an array.
+
+  ```js
+  function sortArgs(...args) {
+      return args.sort();
+  }
+
+  function filter = (...args) => args.filter(el => el === 1);
+  console.log(filter(1,2,3,1));
+  ```
+
+- Destructuring: Easily extract array elements or object properties and store them in variables
+
+    ```js
+    // Array Destructuring
+    [a, b] = ['Hello', 'Max'];
+    console.log(a); // Hello
+    console.log(b); // Max
+
+    // Object Destructuring
+    const {name} = {name: 'Max', age: 28}
+    console.log(name); // Max;
+    console.log(age); // error;
+    ```
+
+- Reference and Primitive Type Refresher
+
+    ```js
+    // primative type
+    let number = 1;
+    let num = number;
+    console.log(num); // 1
+    number = 2;
+    console.log(num); // 1
+
+    // object
+    const person = {
+        name: 'Max'
+    };
+    const secondPerson = person; // reference, not copy
+    console.log(secondPerson.name); // Max
+    person.name = 'Alan';
+    console.log(secondPerson.name) // Alan
+
+    // object copy, the correct way.
+    const person1 = {
+        name: 'Max'
+    }
+    const secondPerson1 = {...person1}; // copy
+    console.log(secondPerson1.name); // Max
+    person1.name = 'Alan';
+    console.log(secondPerson1.name) // Max
+    ```
+
+- Array Functions
+
+    ```js
+    // Array.prototype.map()
+    const numbers = [1, 2, 3];
+
+    const doubleNumArray = numbers.map(num => num * 2);
+
+    const tripleNumArray = numbers.map((num) => {
+        return num * 3;
+    });
+
+    console.log(numbers); // [1,2,3]
+    console.log(doubleNumArray); // [2,4,6]
+    console.log(tripleNumArray); // [3,6,9]
+
+    // Array.prototype.find()
+    // Array.prototype.findIndex()
+    // Array.prototype.filter()
+    // Array.prototype.reduce()
+    // Array.prototype.concat()
+    // Array.prototype.slice()
+    // Array.prototype.splice()
+    ```
+- 
+
+## Extra Material
+
+- Online Html/js/css runtime enviroment: jsbin.com,
