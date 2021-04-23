@@ -24,7 +24,8 @@
 //   );
 // }
 
-import Expenses from "./components/Expenses/Expenses";
+import NewExpense from './components/NewExpense/NewExpense';
+import Expenses from './components/Expenses/Expenses';
 
 // App -> [h2, Expenses]
 // Expenses -> [...ExpenseItem]
@@ -60,7 +61,7 @@ function App() {
 
   return (
     <div className="App">
-      <h2>Let's get started!</h2>
+      <NewExpense />
       <Expenses expenses={expenses} />
     </div>
   );

@@ -129,6 +129,8 @@
   </div>
   ```
 
+- It's both ok to have self closing component tag or with opening tag and closing tag.
+
 - Passing Data via "Props"
 
   ```js
