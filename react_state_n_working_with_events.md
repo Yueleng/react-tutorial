@@ -98,6 +98,7 @@
 - We can use global variable to make input persist. But use effect we have another very important advange, which is called the two-way binding. We don't just listen, but we can also pass a new value back into the input. That's what we called _two-way binding_. The syntax is as follows
 
   ```js
+  // ExpenseForm.js
   const submitHandler = (event) => {
     ...
     setUserInput((prevState) => {
@@ -115,4 +116,67 @@
   <input type="text" value={userInput.enteredTitle} onChange={titleChangeHandler} />
 
   ...
+
+  // Two-way bindings in ExpensesFilter.js
+  ...
+  <ExpensesFilter selected={filteredYear} onChangeYear={yearChangeHandler} />
+  ...
   ```
+
+- Child to Parent Component Communication: You can accept a function via props and call it from inside the lower-level (child) component to then trigger some action in the parent component (which passed the function).
+
+  ```js
+  // Children Component: ExpenseForm
+  ...
+  const submitHandler = (event) => {
+    ...
+    // collect data from event
+    const expenseData = {
+      title: userInput.enteredTitle,
+      amount: userInput.enteredAmount,
+      date: new Date(userInput.enteredDate),
+    };
+    // pass data up to parent
+    props.onSaveExpenseData(expenseData);
+    // clear data
+    setUserInput((prevState) => {
+        return {
+            ...prevState,
+            enteredTitle: "",
+            enteredAmount: "",
+            enteredDate: ""
+        }
+    })
+  };
+  ...
+
+  // Parant Component: NewExpense.js
+  ...
+  const NewExpense = (props) => {
+    const saveExpenseDataHandler = (enteredExpenseData) => {
+      const expenseData = {
+        ...enteredExpenseData,
+        id: Math.random().toString(),
+      };
+      // pass the data further up (NewExpense's parent: App.js).
+      props.onAddExpense(expenseData)
+    };
+
+    return (
+        ...
+        // set the event listener to this component on parent level
+        <ExpnseForm onSaveExpenseData={saveExpenseDataHandler} />
+        ...
+    );
+  };
+  ```
+
+- Currently, we learnt how to pass data from parent to child, child to parent. But have no way to pass data between siblings. The process that the data passed from child to parent is called _Lifting the state up_. The process of passing data down to child from parent is called _Pass state data via props_. This two processes solves the problem of passing data between siblings.
+
+- Like passing data down should not skip component, lift data up is the same, we can only lift data one-level up.
+
+- We usually setState for the data where this data is used for re-rendering.
+
+- Basically, when you are using two-way binding, you are controlling a component. We can categorize components as controlling component and controlled component, or equivalently, presentational(controlled) versus stateful(controlling) components.
+
+- 

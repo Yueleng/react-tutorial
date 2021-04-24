@@ -171,7 +171,7 @@
   }
   ```
 
-- Base on the above example, we can also pass `props` into the child component of `ExpenseItem` component, i.e., we passed the `props` into the grandchildren(and could be even further) of `App` component. i.e. `App -> ExpenseItem -> ExpenseDate`, if we include/create `ExpenseDate` component in `ExpenseItem` component.
+- Base on the above example, we can also pass `props` into the child component of `ExpenseItem` component, i.e., we passed the `props` into the grandchildren(and could be even further) of `App` component. i.e. `App -> ExpenseItem -> ExpenseDate`, if we include/create `ExpenseDate` component in `ExpenseItem` component. Remember that we cannot skip intermediate component.
 
 - Building user interface from smaller building blocks is called composition.
 
