@@ -35,7 +35,7 @@
   };
   ```
 
-- When rendering components in the list, don't forget to add `key` attribute to very element, otherwise it has the following two problems.
+- When rendering components in the list, don't forget to add `key` attribute to every element, otherwise it has the following two problems.
   - From the performance perspective, react has to render each component in the list again. This leads to low performance if we have a long list.
   - Further, it may also lead to bugs, when the component in the list has states itself. This will lead to state info loss, when react re-render every component.
 - `key` helps react identify which component already exists in the list and will only focus on rendering new components.
@@ -52,4 +52,13 @@
   ```
 
 - [Use ternaries rather than && in JSX](https://kentcdodds.com/blog/use-ternaries-rather-than-and-and-in-jsx)
-- 
+- `style` as HTML attribute works a bit different as in JSX. It accepts a js object as a value. `style` accepts both `{'background-color': 'red'}` and `{'backgroundColor': 'red'}`
+- number conversion:
+
+  ```js
+  const expenseData = {
+    title: userInput.enteredTitle,
+    amount: +userInput.enteredAmount,
+    date: new Date(userInput.enteredDate),
+  };
+  ```

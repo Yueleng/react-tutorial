@@ -15,4 +15,5 @@ Content:
 - Online Html/js/css runtime enviroment: jsbin.com, codepen.io,
 - [React Complete Guide Code](https://github.com/academind/react-complete-guide-code/tree/03-react-basics-working-with-components/code)
 
--
+- vscode formatter extension: Prettier - Code formatter
+
