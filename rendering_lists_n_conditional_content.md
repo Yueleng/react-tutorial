@@ -62,3 +62,14 @@
     date: new Date(userInput.enteredDate),
   };
   ```
+
+- iterator through lists
+
+  ```js
+  for (let expense of props.expenses) {
+    // return index number, i.e. January => 0, December => 11
+    const expenseMonth = expense.date.getMonth();
+    // console.log(expense.amount)
+    chartBarsData[expenseMonth].value += expense.amount;
+  }
+  ```
