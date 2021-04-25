@@ -31,7 +31,7 @@
 
 - You should not update `props`'s property or assign `props.key` to some var and change this var to update the rendered HTML. React does not work this way. Because React will not repeart the rendering process when we change the variable, thus changes won't be shown on the HTML.
 
-- In order to solve this problem, we introduce `state` to trigger re-evaluation of react component.
+- In order to solve this problem, we introduce `state` to trigger re-evaluation of react component (the whole file, not just `const componentName = props => {}; export ...`).
 
 - First we should `import {useState} from 'react'`
 - `useState();` be called inside the react component function.
