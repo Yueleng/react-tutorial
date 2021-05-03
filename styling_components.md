@@ -77,4 +77,3 @@
 - When checking the real class names in the browser, we can find the two solutions `styled components` and `css modules` are different. The former looks like two random hash `sc-gsDJrp fMYwMg` the later is more informative `Button_button__2lgkF`, could be intepreted as the componentName_cssClassName\_\_randomHash.
 
 - CSS modules has the advantage with scoping (css only has no such feature) and having css code and javascript code separately (styled components does not have such feature).
-

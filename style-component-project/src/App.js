@@ -20,6 +20,8 @@ const App = () => {
 
   const deleteItemHandler = goalId => {
     setCourseGoals(prevGoals => {
+      // The unshift() method adds one or more elements to the beginning 
+      // of an array and returns the new length of the array.
       const updatedGoals = prevGoals.filter(goal => goal.id !== goalId);
       return updatedGoals;
     });

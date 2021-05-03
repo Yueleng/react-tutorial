@@ -9,6 +9,7 @@ Content:
 - React Basics & Working with Components
 - React State & Working with Events.
 - Reandering Lists & Conditional Content
+- Debugging React Apps
 
 ## Extra Material
 
