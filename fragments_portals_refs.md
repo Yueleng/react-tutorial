@@ -78,4 +78,3 @@
   // controlled component
   <input value={enteredUsername} id="username" type="text" onChange={nameChangedHandler} />
   ```
-

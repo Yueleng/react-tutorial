@@ -11,6 +11,7 @@ Content:
 - Reandering Lists & Conditional Content
 - Debugging React Apps
 - Fragments, Portals and Refs
+- Effects, Reducers & Context
 
 ## Extra Material
 
