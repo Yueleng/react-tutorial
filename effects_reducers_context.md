@@ -150,6 +150,8 @@ useEffect(() => {
 
 in the above case, the logic before return will be run only once, and return statement will be run if the component unmount from DOM. (Both run only once)
 
+- The `[dependencies]` should be as specific as possible, see the code in `react-side-effect-project/.../Login.js`, when we change the whole `state` to `isValid` as dependencies. This avoid unnecessary `useEffect` calls.
+
 ## Introducing Reducers
 
 - Sometimes, you have more complex state - for example if it got multiple states, multiple ways of changing it or dependencies to other states.
@@ -173,9 +175,39 @@ in the above case, the logic before return will be run only once, and return sta
 ## Understanding useReducer()
 
 - Syntax: `const [state, dispatch] = useReducer(reducerFn, initialState, initFn);`
-
 - `state`: The state snapshot used in the component re-render/re-evaluation cycle.
 - `dispatchFn`: A function that can be used to dispatch a new action (i.e. trigger an update of the state)
 - `reducerFn`: `(prevState, action) => newState`, a function that is triggered automatically once an action is dispatched (via `dispatchFn()`) - it receives the latest state snapshot and should return the new, updated state.
 - `initialState`: The initial state
 - `initFn`: A function to set the initial state programmatically.
+- See the example code in `react-side-effect-project/.../Login.js`
+
+## useState() vs useReducer()
+
+- Generally, you'll know when you need `useReducer()`, when using `useState()` becomes cumbersome or you're getting a lot of bug/unintended behaviors.
+
+- `useState()`: The main state management "tool". Great for independent pieces of state/data. Great if state updates are easy and limited to a few of kinds of updates.
+
+- `useReducer()`: Great if you need "more power", should be considered if you have related pieces of state/data. Can be helpful if you have more complex state updates.
+
+## Context API
+
+- Chain of data forwarding might become longer and longer.
+- In previous projects/examples, there is no direct connections between components with no parent/children relationship, for example parallel components, children of parallel components.
+- Create context, see `auth-context.js`
+- Provider and Consumer: [React Context](https://reactjs.org/docs/context.html#gatsby-focus-wrapper)
+- Context Provider can also pass function(definition) into the value attribute.
+- props(traditional way of passing data) has a better re-usability feature, a more generic way, while Context does not.
+- Building & using a custom context provider component(wrapper component)
+- We have two ways to serve the project with `Context API`. One way is through directly use the `<AuthContext.Provider>` in the root component, `App.js` and consumer component will trigger the context by calling `const ctx = useContext(AuthContext);`. The other way is to wrap the context as a whole new user defined wrapper/provider component and use it in `index.js`
+- use both export and defualt export: `auth-context.js`
+- Context limitation: reusable components (such as buttons) must need props as the way of passing data, to implement a generic way of design. Props for configuration, context for statemanagement.
+- React context is NOT optimized for high frequency changes. Redux maybe better.
+- React Context also shouldn't be used to replace ALL component communications and props. Component should still be configurable via props and short "prop chains" might not need any replacement.
+
+## Rules of Hooks
+
+- Only call React Hooks in React Component Functions(also valid for custom hooks). Don't use hooks in the helper function.
+- Only call React Hooks at the Top Level. Don't call them in nested functions; Don't call them in any block statements(`if` statement for example).
+- React Hooks cannot be called inside a callback. React Hooks must be called in a React function component or a custom React Hook function.
+- Always add everythin you refer to inside of `useEffect()` as a dependency.
