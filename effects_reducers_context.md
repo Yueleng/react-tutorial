@@ -211,3 +211,7 @@ in the above case, the logic before return will be run only once, and return sta
 - Only call React Hooks at the Top Level. Don't call them in nested functions; Don't call them in any block statements(`if` statement for example).
 - React Hooks cannot be called inside a callback. React Hooks must be called in a React function component or a custom React Hook function.
 - Always add everythin you refer to inside of `useEffect()` as a dependency.
+
+## Expose your ref
+
+- You can use `useImperativeHandle` and `React.forwardRef` to forward your `ref` to the parent component. See the example of `react-side-effect-project/../Input.js` and `react-side-effect-project/../App.js`
