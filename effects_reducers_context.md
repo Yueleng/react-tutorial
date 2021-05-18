@@ -214,4 +214,5 @@ in the above case, the logic before return will be run only once, and return sta
 
 ## Expose your ref
 
+- `React.forwardRef` is used to assign ref to user defined component and forward `refs` to DOM components.
 - You can use `useImperativeHandle` and `React.forwardRef` to forward your `ref` to the parent component. See the example of `react-side-effect-project/../Input.js` and `react-side-effect-project/../App.js`

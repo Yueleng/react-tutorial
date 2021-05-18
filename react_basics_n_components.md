@@ -244,3 +244,9 @@
 - Q: How can you output dynamic data in React components (i.e. in the returned JSX code)? \
   A: You can use single curly braces (opening & closing) with any JS expression between them. You can't put block statements (e.g. if statements) between those curly braces.
 - Fancy way to convert string to number: `+enteredAge`, where `enteredAge` was originally string.
+
+- Spread Operation in component to spread the props.
+
+  ```js
+  <input {...props.input} />
+  ```
