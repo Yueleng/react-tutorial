@@ -12,6 +12,7 @@ Content:
 - Debugging React Apps
 - Fragments, Portals and Refs
 - Effects, Reducers & Context
+- React Behind the scenes
 
 ## Extra Material
 
