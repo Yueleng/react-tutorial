@@ -25,3 +25,4 @@ Content:
 - [Stop using CSS in JavaScript for web development](https://gajus.medium.com/stop-using-css-in-javascript-for-web-development-fa32fb873dcc)
 - [Styled Component vscode extension](https://marketplace.visualstudio.com/items?itemName=jpoissonnier.vscode-styled-components)
 - [CSS Modules](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/)
+- [JS this](https://academind.com/tutorials/this-keyword-function-references/)

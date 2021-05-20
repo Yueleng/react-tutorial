@@ -204,6 +204,7 @@ in the above case, the logic before return will be run only once, and return sta
 - Context limitation: reusable components (such as buttons) must need props as the way of passing data, to implement a generic way of design. Props for configuration, context for statemanagement.
 - React context is NOT optimized for high frequency changes. Redux maybe better.
 - React Context also shouldn't be used to replace ALL component communications and props. Component should still be configurable via props and short "prop chains" might not need any replacement.
+- Can use multiple `useContext()` in one component, which means this component has access to multiple context. This is not possible for class based component.
 
 ## Rules of Hooks
 
