@@ -13,6 +13,7 @@ Content:
 - Fragments, Portals and Refs
 - Effects, Reducers & Context
 - React Behind the scenes
+- Sending Http Request
 
 ## Extra Material
 
@@ -26,3 +27,8 @@ Content:
 - [Styled Component vscode extension](https://marketplace.visualstudio.com/items?itemName=jpoissonnier.vscode-styled-components)
 - [CSS Modules](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/)
 - [JS this](https://academind.com/tutorials/this-keyword-function-references/)
+- [Hiade Your Javascript Code](https://academind.com/tutorials/hide-javascript-code/)
+- [Star Wars API](swapi.dev)
+- [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+- [Axios: Sending http request](https://www.npmjs.com/package/axios)
+- [HTTP Response Code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
