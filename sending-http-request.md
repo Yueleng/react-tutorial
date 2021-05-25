@@ -15,3 +15,16 @@
 - `fetch(url)`, default `get` method.
 - Promise
 - Async Await
+- Usage examples: `react-preparing-the-project-for-the-next-steps/.../App.js`
+
+## Firebase
+
+- Online database + simple backend application
+- can create rest API for testing or using Post request
+- You don't need to write any backend code.
+
+### Get started
+
+- Create project without google analytics
+- Click on the `Real Database`
+- Copy the url
