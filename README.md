@@ -14,6 +14,7 @@ Content:
 - Effects, Reducers & Context
 - React Behind the scenes
 - Sending Http Request
+- Custom Hooks
 
 ## Extra Material
 

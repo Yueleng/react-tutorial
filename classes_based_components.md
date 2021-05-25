@@ -19,7 +19,7 @@
 
 - `componentDidMount`: Called once component mounted(was evaluated & rendered) adding `useEffect(...[])` with empty dependencies is equivalent with `componentDidMount(...)`.
 - `componentDidUpdate`: Called once component updated(was evaluated & rendered) `useEffect(...,[someValue])`
-- `componentWillUnmount`: Called right before component is unmounted (removed from DOM). `useEffect(() => {...}}, [])`
+- `componentWillUnmount`: Called right before component is unmounted (removed from DOM). `useEffect(() => {...}, return () => {...}}, [])`
 - `componentDidMount` is the place where we send http request. Since logic inside this life cycle will only run once when the component did mount, avoid sending multiple http request.
 
 ## Context
