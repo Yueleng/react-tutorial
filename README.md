@@ -15,6 +15,7 @@ Content:
 - React Behind the scenes
 - Sending Http Request
 - Custom Hooks
+- Handling forms and user input
 
 ## Extra Material
 

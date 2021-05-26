@@ -18,3 +18,7 @@
 
 - Outsorce stateful logic into re-usable functions. Unlike 'regular functions', custom hooks can use other React hooks and React state.
 - One way to solve the code duplication problem.
+
+## Examples
+
+- Please refer to the project `react-custom-hooks-proj/` and `react-custom-hooks-realistic-proj/`
