@@ -152,6 +152,29 @@ in the above case, the logic before return will be run only once, and return sta
 
 - The `[dependencies]` should be as specific as possible, see the code in `react-side-effect-project/.../Login.js`, when we change the whole `state` to `isValid` as dependencies. This avoid unnecessary `useEffect` calls.
 
+## UseEffect() does not accept aysnc function as a whole, while you can define aysnc func inside the function passed as a parameter to useEffect()
+
+```js
+useEffect(() => {
+  const fetchMeals = async () => {
+    const response = await fetch(
+      "https://react-b4926-default-rtdb.firebaseio.com/meals.json"
+    );
+    const responseData = await response.json();
+
+    const loadedMeals = [];
+
+    for (const key in responseData) {
+      loadedMeals.push({
+        id: key,
+        ...responseData[key],
+      });
+    }
+  };
+  fetchMeals();
+}, []);
+```
+
 ## Introducing Reducers
 
 - Sometimes, you have more complex state - for example if it got multiple states, multiple ways of changing it or dependencies to other states.
