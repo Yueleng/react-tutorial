@@ -47,7 +47,7 @@ const cartReducer = (state, action) => {
     } else {
       newItems = [...state.items];
       // newItems[existingCartItemIndex].amount -= 1;
-      const newItem = {...existingItem, amount: existingItem.amount - 1}
+      const newItem = { ...existingItem, amount: existingItem.amount - 1 };
       newItems[existingCartItemIndex] = newItem;
     }
 
@@ -55,6 +55,8 @@ const cartReducer = (state, action) => {
       items: newItems,
       totalAmount: updatedTotalAmount,
     };
+  } else if (action.type === "clear") {
+    return defaultCartState;
   }
 };
 
@@ -72,11 +74,16 @@ const CartProvider = (props) => {
     dispatchCartAction({ type: "remove", id: id });
   };
 
+  const clearCartHandler = () => {
+    dispatchCartAction({type: "clear"})
+  };
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    clearCart: clearCartHandler,
   };
 
   return (
