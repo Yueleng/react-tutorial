@@ -16,6 +16,7 @@ Content:
 - Sending Http Request
 - Custom Hooks
 - Handling forms and user input
+- Redux 
 
 ## Extra Material
 
