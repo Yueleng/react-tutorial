@@ -4,17 +4,25 @@ const initialCartSlice = {
   items: [],
   totalQuantity: 0,
   totalPrice: 0,
+  changed: false,
 };
 
 const cartSlice = createSlice({
   name: "cart_slice",
   initialState: initialCartSlice,
   reducers: {
+    replaceCart(state, action) {
+      state.totalQuantity = action.payload.totalQuantity;
+      state.totalPrice = action.payload.totalPrice;
+      state.items = action.payload.items;
+    },
+
     addItemToCart(state, action) {
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
       state.totalQuantity++;
-
+      state.totalPrice += newItem.price;
+      state.changed = true;
       if (!existingItem) {
         state.items.push({
           id: newItem.id,
@@ -32,8 +40,7 @@ const cartSlice = createSlice({
     removeItemFromCart(state, action) {
       const itemId = action.payload;
       const existingItem = state.items.find((item) => item.id === itemId);
-      state.totalQuantity--;
-
+      state.changed = true;
       if (!existingItem) {
         throw new Error("Remove item error. Item id not found in item list");
       } else {
@@ -44,6 +51,9 @@ const cartSlice = createSlice({
           existingItem.totalPrice -= existingItem.price;
         }
       }
+
+      state.totalQuantity--;
+      state.totalPrice -= existingItem.price;
     },
   },
 });

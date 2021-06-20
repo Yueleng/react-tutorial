@@ -30,7 +30,7 @@ function App() {
           title: data[key].title,
           openingText: data[key].openingText,
           releaseDate: data[key].releaseDate,
-        })
+        });
       }
 
       // const transformedMovies = data.results.map((movieData) => {
@@ -54,14 +54,16 @@ function App() {
 
   async function addMovieHandler(movie) {
     // console.log(movie);
-    const response = await fetch("https://react-b4926-default-rtdb.firebaseio.com/movies.json", {
-      method: "POST",
-      body: JSON.stringify(movie), // body accept JSON data
-      headers: {
-        'Content-Type': 'application/json',
-
+    const response = await fetch(
+      "https://react-b4926-default-rtdb.firebaseio.com/movies.json",
+      {
+        method: "POST",
+        body: JSON.stringify(movie), // body accept JSON data
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
     const data = await response.json();
     console.log(data);
   }

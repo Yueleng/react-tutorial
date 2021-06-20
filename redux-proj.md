@@ -17,3 +17,9 @@ Reducers must be pure, side-effect free, synchronous functions.
 
 - Inside the components (e.g. useEffect())
 - Inside the action creators
+
+## Fat Reducers VS Fat Component VS Fat Actions
+
+- Synchronous, side-effect free code (i.e. data transformations), Prefer fat reducers, avoid action creators or components.
+
+- Async code or with side-effects: prefer Action Creators or Components, Never use Reducers
