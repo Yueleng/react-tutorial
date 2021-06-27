@@ -39,3 +39,4 @@ Content:
 - [Custom Hooks](https://academind.com/tutorials/reactjs-a-custom-useform-hook/)
 - [Formik](https://formik.org/docs/overview)
 - [React Route](https://reactrouter.com/)
+- [Firebase Auth Rest API](https://firebase.google.com/docs/reference/rest/auth#section-sign-in-email-password)
