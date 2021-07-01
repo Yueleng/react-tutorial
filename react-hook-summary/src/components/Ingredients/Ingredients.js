@@ -10,6 +10,7 @@ import IngredientForm from "./IngredientForm";
 import IngredientList from "./IngredientList";
 import ErrorModel from "../UI/ErrorModal";
 import Search from "./Search";
+import useHttp from "../../hooks/http";
 
 // define reducer outside the Ingredients to avoid unnecessary re-creation.
 const ingredientReducer = (currentIngredients, action) => {
@@ -25,20 +26,20 @@ const ingredientReducer = (currentIngredients, action) => {
   }
 };
 
-const httpReducer = (httpState, action) => {
-  switch (action.type) {
-    case "SEND":
-      return { loading: true, error: null };
-    case "RESPONSE":
-      return { ...httpState, loading: false };
-    case "ERROR":
-      return { loading: false, error: action.errorMessage };
-    case "CLEAR":
-      return { loading: false, error: null };
-    default:
-      throw new Error("Should not be reached!");
-  }
-};
+// const httpReducer = (httpState, action) => {
+//   switch (action.type) {
+//     case "SEND":
+//       return { loading: true, error: null };
+//     case "RESPONSE":
+//       return { ...httpState, loading: false };
+//     case "ERROR":
+//       return { loading: false, error: action.errorMessage };
+//     case "CLEAR":
+//       return { loading: false, error: null };
+//     default:
+//       throw new Error("Should not be reached!");
+//   }
+// };
 
 function Ingredients() {
   const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
@@ -48,10 +49,28 @@ function Ingredients() {
   // const [isLoading, setIsLoading] = useState(false);
   // const [error, setError] = useState();
 
-  const [httpState, dispatchHttp] = useReducer(httpReducer, {
-    loading: false,
-    error: null,
-  });
+  const {
+    isLoading,
+    error,
+    data,
+    sendRequest,
+    reqExtra,
+    reqIdentifier,
+    clear,
+  } = useHttp();
+
+  useEffect(() => {
+    if (!isLoading && !error && reqIdentifier === "REMOVE_INGREDIENT") {
+      dispatch({ type: "DELETE", id: reqExtra });
+    } else if (!isLoading && !error && reqIdentifier === "ADD_INGREDIENT") {
+      dispatch({ type: "ADD", ingredient: { id: data.name, ...reqExtra } });
+    }
+  }, [data, reqExtra, reqIdentifier, isLoading, error]);
+
+  // const [httpState, dispatchHttp] = useReducer(httpReducer, {
+  //   loading: false,
+  //   error: null,
+  // });
 
   const filteredIngredientsHandler = useCallback((filteredIngredients) => {
     setFilteredIngredients(filteredIngredients);
@@ -79,62 +98,88 @@ function Ingredients() {
     console.log("RENDERING INGREDIENTS", userIngredients);
   }, [userIngredients]);
 
-  const addIngredientHandler = useCallback((ingredient) => {
-    // setIsLoading(true);
-    dispatchHttp({ type: "SEND" });
-    fetch("https://react-b4926-default-rtdb.firebaseio.com/ingredients.json", {
-      method: "POST",
-      body: JSON.stringify(ingredient),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((response) => {
-        // setIsLoading(false);
-        dispatchHttp({ type: "RESPONSE" });
-        return response.json();
-      })
-      .then((responseData) => {
-        // setUserIngredients((prevIngredients) => [
-        //   ...prevIngredients,
-        //   { id: responseData.name, ...ingredient },
-        // ]);
+  // const addIngredientHandler = useCallback((ingredient) => {
+  //   // setIsLoading(true);
+  //   dispatchHttp({ type: "SEND" });
+  //   fetch("https://react-b4926-default-rtdb.firebaseio.com/ingredients.json", {
+  //     method: "POST",
+  //     body: JSON.stringify(ingredient),
+  //     headers: { "Content-Type": "application/json" },
+  //   })
+  //     .then((response) => {
+  //       // setIsLoading(false);
+  //       dispatchHttp({ type: "RESPONSE" });
+  //       return response.json();
+  //     })
+  //     .then((responseData) => {
+  //       // setUserIngredients((prevIngredients) => [
+  //       //   ...prevIngredients,
+  //       //   { id: responseData.name, ...ingredient },
+  //       // ]);
 
-        dispatch({
-          type: "ADD",
-          ingredient: { id: responseData.name, ...ingredient },
-        });
-      });
-  }, []);
+  //       dispatch({
+  //         type: "ADD",
+  //         ingredient: { id: responseData.name, ...ingredient },
+  //       });
+  //     });
+  // }, []);
 
-  const onRemoveIngredientHandler = useCallback((id) => {
-    // setIsLoading(true);
-    dispatchHttp({ type: "SEND" });
-    fetch(
-      `https://react-b4926-default-rtdb.firebaseio.com/ingredients/${id}.json`,
-      {
-        method: "DELETE",
-      }
-    )
-      .then((response) => {
-        // setIsLoading(false);
-        dispatchHttp({ type: "RESPONSE" });
+  const addIngredientHandler = useCallback(
+    (ingredient) => {
+      sendRequest(
+        "https://react-b4926-default-rtdb.firebaseio.com/ingredients.json", // url
+        "POST", // method
+        JSON.stringify(ingredient), // body,
+        ingredient, // reqExtra
+        "ADD_INGREDIENT" // identifier
+      );
+    },
+    [sendRequest]
+  );
 
-        // const updatedUserIngredients = userIngredients.filter(
-        //   (userIngredient) => userIngredient.id !== id
-        // );
-        // setUserIngredients(updatedUserIngredients);
-        dispatch({ type: "DELETE", id: id });
-      })
-      .catch((e) => {
-        // setError(e.message);
-        dispatchHttp({ type: "ERROR", errorMessage: e.message });
-      });
-  }, []);
+  // const onRemoveIngredientHandler = useCallback((id) => {
+  //   // setIsLoading(true);
+  //   dispatchHttp({ type: "SEND" });
+  //   fetch(
+  //     `https://react-b4926-default-rtdb.firebaseio.com/ingredients/${id}.json`,
+  //     {
+  //       method: "DELETE",
+  //     }
+  //   )
+  //     .then((response) => {
+  //       // setIsLoading(false);
+  //       dispatchHttp({ type: "RESPONSE" });
 
-  const clearError = useCallback(() => {
-    // setError(null);
-    // setIsLoading(false);
-    dispatchHttp({ type: "CLEAR" });
-  }, []);
+  //       // const updatedUserIngredients = userIngredients.filter(
+  //       //   (userIngredient) => userIngredient.id !== id
+  //       // );
+  //       // setUserIngredients(updatedUserIngredients);
+  //       dispatch({ type: "DELETE", id: id });
+  //     })
+  //     .catch((e) => {
+  //       // setError(e.message);
+  //       dispatchHttp({ type: "ERROR", errorMessage: e.message });
+  //     });
+  // }, []);
+
+  const onRemoveIngredientHandler = useCallback(
+    (ingredientId) => {
+      sendRequest(
+        `https://react-b4926-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
+        "DELETE",
+        null,
+        ingredientId,
+        "REMOVE_INGREDIENT"
+      );
+    },
+    [sendRequest]
+  );
+
+  // const clearError = useCallback(() => {
+  //   // setError(null);
+  //   // setIsLoading(false);
+  //   dispatchHttp({ type: "CLEAR" });
+  // }, []);
 
   // Alternative to React.memo
   const ingredientList = useMemo(() => {
@@ -148,13 +193,11 @@ function Ingredients() {
 
   return (
     <div className="App">
-      {httpState.error && (
-        <ErrorModel onClose={clearError}>{httpState.error}</ErrorModel>
-      )}
+      {error && <ErrorModel onClose={clear}>{error}</ErrorModel>}
 
       <IngredientForm
         onAddIngredient={addIngredientHandler}
-        loading={httpState.loading}
+        loading={isLoading}
       />
 
       <section>
