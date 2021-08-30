@@ -18,6 +18,7 @@ Content:
 - Handling forms and user input
 - Redux
 - React Route
+- React Testing
 
 ## Extra Material
 
@@ -42,3 +43,5 @@ Content:
 - [Firebase Auth Rest API](https://firebase.google.com/docs/reference/rest/auth#section-sign-in-email-password)
 - [Transition Group](http://reactcommunity.org/react-transition-group/)
 - [Clousure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
+- [Jest](https://jestjs.io/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
